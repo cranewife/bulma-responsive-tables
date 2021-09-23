@@ -1,6 +1,6 @@
 const {series, src, dest} = require('gulp')
 const rename = require('gulp-rename')
-const sass = require('gulp-sass')
+const sass = require('gulp-sass')(require('node-sass'))
 
 sass.compiler = require('node-sass')
 
