@@ -1,3 +1,5 @@
+@import "./mixins";
+
 @mixin table-cards {
   thead {
     display: none;
@@ -14,6 +16,10 @@
     max-width: 100%;
     position: relative;
     display: block;
+
+    @include prefers-scheme(dark) {
+      box-shadow: 0 2px 3px rgba($white, 0.1), 0 0 0 1px rgba($white, 0.1);
+    }
 
     td {
       border: 0; // Disable is-bordered
@@ -48,6 +54,10 @@
       justify-content: space-between;
       text-align: right;
       border-bottom: 1px solid $background;
+
+      @include prefers-scheme(dark) {
+        border-bottom-color: $grey-darker;
+      }
 
       &:before {
         content: attr(data-label);
