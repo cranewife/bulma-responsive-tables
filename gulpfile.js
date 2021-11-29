@@ -1,8 +1,6 @@
 const {series, src, dest} = require('gulp')
 const rename = require('gulp-rename')
-const sass = require('gulp-sass')(require('node-sass'))
-
-sass.compiler = require('node-sass')
+const sass = require('gulp-sass')(require('sass'))
 
 /* Destination dir (demo or not)? */
 
@@ -17,7 +15,7 @@ function processScssFn ( outputStyle, isDemo ) {
   const outName = outputStyle === 'compressed' ? 'main.min.css' : 'main.css'
 
   return src('bulma-responsive-tables.scss')
-    .pipe(sass({outputStyle}).on('error', sass.logError))
+    .pipe(sass.sync({outputStyle}).on('error', sass.logError))
     .pipe(rename(outName))
     .pipe(dest(destDir(isDemo)))
 }
@@ -38,7 +36,7 @@ function processScssCompressedDemo () {
 
 function processBulmaSassFn ( isDemo ) {
   return src('node_modules/bulma/bulma.sass')
-    .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
+    .pipe(sass.sync({outputStyle:'compressed'}).on('error', sass.logError))
     .pipe(rename('bulma.min.css'))
     .pipe(dest(destDir(isDemo)))
 }
